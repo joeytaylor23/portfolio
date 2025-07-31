@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects — Joey Taylor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">Joey Taylor.</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#timeline" class="nav-link">Experience</a></li>
+                <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Projects Header -->
+    <section class="projects-header">
+        <div class="container">
+            <h2 class="section-title">Projects.</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Explore my complete portfolio of work, from web applications to desktop software and everything in between.</p>
+                </div>
+            </div>
+            
+            <!-- Search and Filter Section -->
+            <div class="projects-controls">
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="project-search" placeholder="Search projects..." class="search-input">
+                </div>
+                
+                <div class="filter-container">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="web">Web Apps</button>
+                    <button class="filter-btn" data-filter="desktop">Desktop</button>
+                    <button class="filter-btn" data-filter="mobile">Mobile</button>
+                    <button class="filter-btn" data-filter="ai">AI/ML</button>
+                    <button class="filter-btn" data-filter="game">Games</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="projects-grid-section">
+        <div class="container">
+            <div class="projects-grid" id="projects-grid">
+                <!-- Featured Projects -->
+                <div class="project-card" data-category="web game" data-tags="react three.js typescript vite 3d game">
+                    <div class="project-image-container">
+                        <img src="ProjectPics/tictactoe.png" alt="3D Tic-Tac-Toe" class="project-card-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://joeytaylor23.github.io/3Dtictactoe" class="btn btn-primary" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="https://github.com/joeytaylor23/3Dtictactoe" class="btn btn-secondary" target="_blank">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>3D Tic-Tac-Toe</h3>
+                        <p>A full-stack 3D tic-tac-toe game with dynamic background images that correlate with the time of day.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Three.js</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">Vite</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="desktop" data-tags="python pytqt5 socket.io sql cybersecurity">
+                    <div class="project-image-container">
+                        <img src="ProjectPics/security.jpg" alt="Security Dashboard" class="project-card-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://joeytaylor23.github.io/security_dash/docs/index.html" class="btn btn-primary" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="https://github.com/joeytaylor23/security_dash" class="btn btn-secondary" target="_blank">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Security Dashboard</h3>
+                        <p>A Python desktop app for security teams to track incidents with real-time monitoring and severity classification.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">PyQt5</span>
+                            <span class="tech-tag">Socket.io</span>
+                            <span class="tech-tag">SQL</span>
+                            <span class="tech-tag">Cybersecurity</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="web" data-tags="react typescript socket.io node.js collaboration">
+                    <div class="project-image-container">
+                        <img src="ProjectPics/whiteboard.jpg" alt="Collaborative Whiteboard" class="project-card-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://joeytaylor23.github.io/whiteboard" class="btn btn-primary" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="https://github.com/joeytaylor23/whiteboard" class="btn btn-secondary" target="_blank">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Collaborative Whiteboard</h3>
+                        <p>A modern, real-time collaborative whiteboard with room-based collaboration, user avatars, and customizable drawing tools.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">Socket.IO</span>
+                            <span class="tech-tag">Node.js</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Demo Projects -->
+                <div class="project-card" data-category="ai" data-tags="python tensorflow opencv machine-learning computer-vision">
+                    <div class="project-image-container">
+                        <div class="project-placeholder-demo">
+                            <i class="fas fa-brain"></i>
+                            <span>AI Project</span>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="btn btn-primary">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="#" class="btn btn-secondary">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Computer Vision Assistant</h3>
+                        <p>An AI-powered computer vision system that can identify objects, faces, and text in real-time using deep learning.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">TensorFlow</span>
+                            <span class="tech-tag">OpenCV</span>
+                            <span class="tech-tag">Machine Learning</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="mobile" data-tags="react-native expo firebase mobile-app">
+                    <div class="project-image-container">
+                        <div class="project-placeholder-demo">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>Mobile App</span>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="btn btn-primary">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="#" class="btn btn-secondary">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Task Manager Pro</h3>
+                        <p>A cross-platform mobile app for task management with cloud sync, reminders, and team collaboration features.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Expo</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Mobile</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="web" data-tags="vue.js firebase real-time database">
+                    <div class="project-image-container">
+                        <div class="project-placeholder-demo">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Web App</span>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="btn btn-primary">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="#" class="btn btn-secondary">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Analytics Dashboard</h3>
+                        <p>A real-time analytics dashboard with interactive charts, data visualization, and customizable reporting tools.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Chart.js</span>
+                            <span class="tech-tag">Analytics</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="game" data-tags="unity c# game-development 2d">
+                    <div class="project-image-container">
+                        <div class="project-placeholder-demo">
+                            <i class="fas fa-gamepad"></i>
+                            <span>Game</span>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="btn btn-primary">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="#" class="btn btn-secondary">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Platform Adventure</h3>
+                        <p>A 2D platformer game with physics-based gameplay, multiple levels, and an engaging storyline.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Unity</span>
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">Game Development</span>
+                            <span class="tech-tag">2D</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="desktop" data-tags="java swing database desktop-application">
+                    <div class="project-image-container">
+                        <div class="project-placeholder-demo">
+                            <i class="fas fa-desktop"></i>
+                            <span>Desktop App</span>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="btn btn-primary">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="#" class="btn btn-secondary">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Inventory Manager</h3>
+                        <p>A comprehensive inventory management system with barcode scanning, reporting, and multi-location support.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Swing</span>
+                            <span class="tech-tag">Database</span>
+                            <span class="tech-tag">Desktop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Home -->
+    <section class="back-to-home">
+        <div class="container">
+            <a href="index.html" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </section>
+
+    <script src="projects.js"></script>
+</body>
+</html> 

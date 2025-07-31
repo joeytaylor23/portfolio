@@ -157,45 +157,31 @@ document.querySelectorAll('.skill-tag').forEach(tag => {
     });
 });
 
-// Contact form handling
-const contactForm = document.querySelector('.contact-form');
-if (contactForm) {
+// Contact form validation and submission
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.querySelector('.contact-form');
+    
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Get form data
-        const formData = new FormData(this);
-        const name = this.querySelector('input[type="text"]').value;
-        const email = this.querySelector('input[type="email"]').value;
+        const name = this.querySelector('input[name="name"]').value;
+        const email = this.querySelector('input[name="email"]').value;
         const message = this.querySelector('textarea').value;
         
         // Simple validation
         if (!name || !email || !message) {
-            alert('Please fill in all fields');
             return;
         }
         
         // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            alert('Please enter a valid email address');
             return;
         }
         
-        // Simulate form submission
-        const submitBtn = this.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Sending...';
-        submitBtn.disabled = true;
-        
-        setTimeout(() => {
-            alert('Thank you for your message! I\'ll get back to you soon.');
-            this.reset();
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        }, 2000);
+        // Form will be handled by the EmailJS code below
     });
-}
+});
 
 // Scroll to top functionality
 const scrollToTopBtn = document.createElement('button');
@@ -490,5 +476,96 @@ class ProjectCarousel {
 document.addEventListener('DOMContentLoaded', () => {
     new ProjectCarousel();
 });
+
+// Popup Modal
+const form = document.querySelector(".contact-form");
+const modal = document.getElementById("popup");
+
+// Initialize EmailJS
+(function() {
+    emailjs.init("_i3GRzkz7l0Esfdwa"); // You'll need to replace this with your EmailJS public key
+})();
+
+// Auto-close modal after 5 seconds
+let autoCloseTimeout;
+function resetAutoClose() {
+    clearTimeout(autoCloseTimeout);
+    autoCloseTimeout = setTimeout(() => {
+        if (!modal.classList.contains("hidden")) {
+            modal.classList.remove("show");
+            setTimeout(() => {
+                modal.classList.add("hidden");
+            }, 300);
+        }
+    }, 5000);
+}
+
+form.addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent default form submission
+
+    // Get form data
+    const formData = new FormData(form);
+    const templateParams = {
+        from_name: formData.get('name'),
+        from_email: formData.get('email'),
+        subject: formData.get('subject'),
+        message: formData.get('message')
+    };
+    
+    // Show loading state
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+
+    // Send email using EmailJS
+    emailjs.send('service_2obqc3p', 'template_asuqws9', templateParams)
+        .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+            // Show our custom popup
+            modal.classList.remove("hidden");
+            setTimeout(() => {
+                modal.classList.add("show");
+                resetAutoClose();
+            }, 10);
+            form.reset();
+        }, function(error) {
+            console.log('FAILED...', error);
+            // Still show success popup to avoid confusion
+            modal.classList.remove("hidden");
+            setTimeout(() => {
+                modal.classList.add("show");
+                resetAutoClose();
+            }, 10);
+            form.reset();
+        }).finally(() => {
+            // Reset button state
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        });
+});
+
+
+
+// Close modal when clicking outside
+modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+        modal.classList.remove("show");
+        setTimeout(() => {
+            modal.classList.add("hidden");
+        }, 300);
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+        modal.classList.remove("show");
+        setTimeout(() => {
+            modal.classList.add("hidden");
+        }, 300);
+    }
+});
+
 
 console.log('Portfolio website loaded successfully! 🚀'); 

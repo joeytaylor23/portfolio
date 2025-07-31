@@ -6,6 +6,7 @@
     <title>Joey Taylor — Developer</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -155,6 +156,13 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Resume Download Button -->
+            <div class="resume-download-section">
+                <a href="C:\Users\jt136\New Portfolio replica\Joey O. Taylor's Resume (1).pdf" class="btn btn-primary" target="_blank" download>
+                    <i class="fas fa-download"></i> Download Resume
+                </a>
+            </div>
         </div>
     </section>
 
@@ -167,7 +175,9 @@
                     <div class="video-slide active" data-slide="1">
                         <div class="video-content">
                             <div class="video-preview">
-                                <img src="ProjectPics/tictactoe.png" alt="Tic-Tac-Toe" class="project-image">
+                                <div class="project-placeholder">
+                                    <img src="ProjectPics/tictactoe.png" alt="Tic-Tac-Toe" class="project-image">
+                                </div>
                             </div>
                             <div class="video-info">
                                 <h3>Tic-Tac-Toe</h3>
@@ -199,9 +209,7 @@
                             </div>
                             <div class="video-info">
                                 <h3>Security Dashboard</h3>
-                                <p>A Python-based desktop application that helps security teams efficiently track and manage security incidents, whereas users can create, monitor, and respond to security incidents with severity-based classification. 
-                                    Also includes real-time incident tracking, color-coded severity levels, detailed logging, and persistent SQLite database storage.
-                                </p>
+                                <p>A Python desktop app for security teams to track incidents with real-time monitoring and severity classification.</p>
                                 <div class="video-tech">
                                     <span class="tech-tag">PYTQT5</span>
                                     <span class="tech-tag">Socket.io</span>
@@ -264,6 +272,17 @@
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
+            
+            <!-- View All Projects Section -->
+            <div class="view-all-projects">
+                <div class="projects-intro">
+                    <h3>Want to see more?</h3>
+                    <p>Explore my complete portfolio with detailed project descriptions, code samples, and live demonstrations.</p>
+                    <a href="projects.html" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i> View All Projects
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -318,26 +337,21 @@
                 </div>
                 
                 <div class="contact-form-container">
-<<<<<<< HEAD
                 <h3>Send me a message</h3>
-                <form action="https://formspree.io/f/mgvanyvg" method="POST" class="contact-form">
-=======
-                    <h3>Send me a message</h3>
-                    <form class="contact-form" action="https://formspree.io/f/mgvanyvg" method="POST">
->>>>>>> cdd72fd (Added formspree)
+                <form class="contact-form" id="contact-form">
                         <div class="form-row">
                             <div class="form-group">
-                                <input type="text" placeholder="Your name" required>
+                                <input type="text" name="name" placeholder="Your name" required>
                             </div>
                             <div class="form-group">
-                                <input type="email" placeholder="Your E-mail" required>
+                                <input type="email" name="email" placeholder="Your E-mail" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" placeholder="Subject" required>
+                            <input type="text" name="subject" placeholder="Subject" required>
                         </div>
                         <div class="form-group">
-                            <textarea placeholder="Your message" rows="6" required></textarea>
+                            <textarea name="message" placeholder="Your message" rows="6" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">
                             Send Message
@@ -347,7 +361,12 @@
             </div>
         </div>
     </section>
-
+    <div id="popup" class="popup-modal hidden">
+        <div class="popup-content">
+          <h3>Message Sent!</h3>
+          <p>Thanks for reaching out. I'll get back to you soon.</p>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html> 
