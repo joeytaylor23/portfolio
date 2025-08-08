@@ -159,7 +159,7 @@ document.querySelectorAll('.skill-tag').forEach(tag => {
 
 // Contact form validation and submission
 document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.querySelector('.contact-form');
+const contactForm = document.querySelector('.contact-form');
     
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -542,7 +542,7 @@ form.addEventListener("submit", function (e) {
             // Reset button state
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
-        });
+    });
 });
 
 
@@ -552,7 +552,7 @@ modal.addEventListener("click", (e) => {
     if (e.target === modal) {
         modal.classList.remove("show");
         setTimeout(() => {
-            modal.classList.add("hidden");
+    modal.classList.add("hidden");
         }, 300);
     }
 });
@@ -561,8 +561,8 @@ modal.addEventListener("click", (e) => {
 document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !modal.classList.contains("hidden")) {
         modal.classList.remove("show");
-        setTimeout(() => {
-            modal.classList.add("hidden");
+setTimeout(() => {
+    modal.classList.add("hidden");
         }, 300);
     }
 });
