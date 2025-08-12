@@ -378,13 +378,26 @@ class ProjectCarousel {
         });
         
         // Carousel controls
-        document.querySelector('.carousel-control.prev').addEventListener('click', () => {
-            this.prevSlide();
-        });
+        const prevButton = document.querySelector('.carousel-control.prev');
+        const nextButton = document.querySelector('.carousel-control.next');
         
-        document.querySelector('.carousel-control.next').addEventListener('click', () => {
-            this.nextSlide();
-        });
+        if (prevButton) {
+            prevButton.addEventListener('click', () => {
+                console.log('Previous button clicked');
+                this.prevSlide();
+            });
+        } else {
+            console.error('Previous button not found');
+        }
+        
+        if (nextButton) {
+            nextButton.addEventListener('click', () => {
+                console.log('Next button clicked');
+                this.nextSlide();
+            });
+        } else {
+            console.error('Next button not found');
+        }
         
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
@@ -402,7 +415,7 @@ class ProjectCarousel {
     setupTouchSupport() {
         let startX = 0;
         let endX = 0;
-        const carousel = document.querySelector('.video-carousel');
+        const carousel = document.querySelector('.project-carousel');
         
         carousel.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
@@ -428,13 +441,26 @@ class ProjectCarousel {
     }
     
     goToSlide(slideNumber) {
-        if (this.isTransitioning || slideNumber === this.currentSlide) return;
+        console.log(`Attempting to go to slide ${slideNumber}`);
+        if (this.isTransitioning || slideNumber === this.currentSlide) {
+            console.log('Transition blocked - transitioning:', this.isTransitioning, 'current slide:', this.currentSlide);
+            return;
+        }
         
         this.isTransitioning = true;
         
         // Update current slide
-        const currentSlideElement = document.querySelector(`.video-slide[data-slide="${this.currentSlide}"]`);
-        const newSlideElement = document.querySelector(`.video-slide[data-slide="${slideNumber}"]`);
+        const currentSlideElement = document.querySelector(`.project-slide[data-slide="${this.currentSlide}"]`);
+        const newSlideElement = document.querySelector(`.project-slide[data-slide="${slideNumber}"]`);
+        
+        console.log('Current slide element:', currentSlideElement);
+        console.log('New slide element:', newSlideElement);
+        
+        if (!currentSlideElement || !newSlideElement) {
+            console.error('Slide elements not found');
+            this.isTransitioning = false;
+            return;
+        }
         
         // Update navigation dots
         document.querySelectorAll('.nav-dot').forEach(dot => {
@@ -458,6 +484,7 @@ class ProjectCarousel {
             currentSlideElement.classList.remove('active', 'prev');
             this.currentSlide = slideNumber;
             this.isTransitioning = false;
+            console.log(`Transition complete. Current slide: ${this.currentSlide}`);
         }, 600);
     }
     
