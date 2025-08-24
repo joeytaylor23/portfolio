@@ -52,8 +52,11 @@ class ProjectsManager {
     constructor() {
         this.projects = document.querySelectorAll('.project-card');
         this.searchInput = document.getElementById('project-search');
-        this.filterButtons = document.querySelectorAll('.filter-btn');
-        this.currentFilter = 'all';
+        this.filterDropdown = document.getElementById('filter-dropdown-content');
+        this.filterDropdownBtn = document.getElementById('filter-dropdown-btn');
+        this.filterCheckboxes = document.querySelectorAll('.filter-checkbox input');
+        this.activeFiltersContainer = document.getElementById('active-filters');
+        this.selectedFilters = new Set(['all']);
         this.currentSearch = '';
         
         this.init();
@@ -62,6 +65,7 @@ class ProjectsManager {
     init() {
         this.bindEvents();
         this.setupAnimations();
+        this.updateActiveFilters();
     }
     
     bindEvents() {
@@ -71,18 +75,120 @@ class ProjectsManager {
             this.filterProjects();
         });
         
-        // Filter functionality
-        this.filterButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                // Update active button
-                this.filterButtons.forEach(b => b.classList.remove('active'));
-                e.target.classList.add('active');
-                
-                // Update current filter
-                this.currentFilter = e.target.dataset.filter;
-                this.filterProjects();
+        // Dropdown toggle
+        this.filterDropdownBtn.addEventListener('click', () => {
+            this.toggleDropdown();
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!this.filterDropdownBtn.contains(e.target) && !this.filterDropdown.contains(e.target)) {
+                this.closeDropdown();
+            }
+        });
+        
+        // Filter checkbox changes
+        this.filterCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                this.handleFilterChange(e.target);
             });
         });
+    }
+    
+    toggleDropdown() {
+        this.filterDropdown.classList.toggle('show');
+        this.filterDropdownBtn.classList.toggle('active');
+    }
+    
+    closeDropdown() {
+        this.filterDropdown.classList.remove('show');
+        this.filterDropdownBtn.classList.remove('active');
+    }
+    
+    handleFilterChange(checkbox) {
+        if (checkbox.value === 'all') {
+            // If "All" is checked, uncheck others and check only "All"
+            if (checkbox.checked) {
+                this.filterCheckboxes.forEach(cb => {
+                    if (cb !== checkbox) cb.checked = false;
+                });
+                this.selectedFilters.clear();
+                this.selectedFilters.add('all');
+            } else {
+                // If "All" is unchecked, check at least one other filter
+                const otherFilters = Array.from(this.filterCheckboxes).filter(cb => cb !== checkbox);
+                if (otherFilters.every(cb => !cb.checked)) {
+                    checkbox.checked = true;
+                    return;
+                }
+            }
+        } else {
+            // If other filter is checked, uncheck "All"
+            if (checkbox.checked) {
+                const allCheckbox = document.querySelector('.filter-checkbox input[value="all"]');
+                allCheckbox.checked = false;
+                this.selectedFilters.delete('all');
+                this.selectedFilters.add(checkbox.value);
+            } else {
+                this.selectedFilters.delete(checkbox.value);
+                // If no filters selected, select "All"
+                if (this.selectedFilters.size === 0) {
+                    const allCheckbox = document.querySelector('.filter-checkbox input[value="all"]');
+                    allCheckbox.checked = true;
+                    this.selectedFilters.add('all');
+                }
+            }
+        }
+        
+        this.updateActiveFilters();
+        this.filterProjects();
+    }
+    
+    updateActiveFilters() {
+        this.activeFiltersContainer.innerHTML = '';
+        
+        if (this.selectedFilters.has('all')) {
+            this.activeFiltersContainer.innerHTML = '<span class="filter-tag">All Projects</span>';
+        } else {
+            this.selectedFilters.forEach(filter => {
+                const filterName = this.getFilterDisplayName(filter);
+                const filterTag = document.createElement('span');
+                filterTag.className = 'filter-tag';
+                filterTag.innerHTML = `${filterName} <span class="remove-filter" data-filter="${filter}">×</span>`;
+                this.activeFiltersContainer.appendChild(filterTag);
+            });
+            
+            // Add click handlers for remove buttons
+            this.activeFiltersContainer.querySelectorAll('.remove-filter').forEach(removeBtn => {
+                removeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const filter = e.target.dataset.filter;
+                    const checkbox = document.querySelector(`.filter-checkbox input[value="${filter}"]`);
+                    checkbox.checked = false;
+                    this.selectedFilters.delete(filter);
+                    
+                    if (this.selectedFilters.size === 0) {
+                        const allCheckbox = document.querySelector('.filter-checkbox input[value="all"]');
+                        allCheckbox.checked = true;
+                        this.selectedFilters.add('all');
+                    }
+                    
+                    this.updateActiveFilters();
+                    this.filterProjects();
+                });
+            });
+        }
+    }
+    
+    getFilterDisplayName(filter) {
+        const names = {
+            'web': 'Web Applications',
+            'desktop': 'Desktop Software',
+            'healthcare': 'Healthcare IT',
+            'game': 'Games',
+            'security': 'Security'
+        };
+        return names[filter] || filter;
     }
     
     filterProjects() {
@@ -92,10 +198,11 @@ class ProjectsManager {
             const title = project.querySelector('h3').textContent.toLowerCase();
             const description = project.querySelector('p').textContent.toLowerCase();
             
-            // Check if project matches current filter
-            const matchesFilter = this.currentFilter === 'all' || 
-                                category.includes(this.currentFilter) || 
-                                tags.includes(this.currentFilter);
+            // Check if project matches any selected filter
+            const matchesFilter = this.selectedFilters.has('all') || 
+                                Array.from(this.selectedFilters).some(filter => 
+                                    category.includes(filter) || tags.includes(filter)
+                                );
             
             // Check if project matches search
             const matchesSearch = this.currentSearch === '' ||
@@ -121,7 +228,6 @@ class ProjectsManager {
             project.style.display !== 'none'
         );
         
-        // You can add a results counter here if needed
         console.log(`${visibleProjects.length} projects found`);
     }
     
