@@ -280,4 +280,27 @@ document.addEventListener('DOMContentLoaded', () => {
     projectCards.forEach(el => observer.observe(el));
 });
 
-console.log('Projects page loaded successfully! 🚀'); 
+console.log('Projects page loaded successfully! 🚀');
+
+// Disclaimer sliding animation
+document.addEventListener('DOMContentLoaded', () => {
+    const disclaimerBox = document.getElementById('disclaimer-box');
+    
+    if (disclaimerBox) {
+        // Show disclaimer after a short delay
+        setTimeout(() => {
+            disclaimerBox.classList.add('show');
+        }, 1000);
+        
+        // Hide disclaimer after 5 seconds
+        setTimeout(() => {
+            disclaimerBox.classList.remove('show');
+            disclaimerBox.classList.add('hide');
+        }, 6000);
+        
+        // Remove from DOM after animation completes
+        setTimeout(() => {
+            disclaimerBox.remove();
+        }, 7000);
+    }
+}); 
