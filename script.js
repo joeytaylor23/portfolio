@@ -369,14 +369,6 @@ class ProjectCarousel {
     }
     
     bindEvents() {
-        // Navigation dots
-        document.querySelectorAll('.nav-dot').forEach(dot => {
-            dot.addEventListener('click', (e) => {
-                const slideNumber = parseInt(e.target.dataset.slide);
-                this.goToSlide(slideNumber);
-            });
-        });
-        
         // Carousel controls
         const prevButton = document.querySelector('.carousel-control.prev');
         const nextButton = document.querySelector('.carousel-control.next');
@@ -462,11 +454,7 @@ class ProjectCarousel {
             return;
         }
         
-        // Update navigation dots
-        document.querySelectorAll('.nav-dot').forEach(dot => {
-            dot.classList.remove('active');
-        });
-        document.querySelector(`.nav-dot[data-slide="${slideNumber}"]`).classList.add('active');
+        // Navigation dots removed - no longer needed
         
         // Animate slide transition
         if (slideNumber > this.currentSlide) {

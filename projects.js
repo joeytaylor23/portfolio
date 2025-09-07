@@ -174,9 +174,9 @@ class ProjectsManager {
                     }
                     
                     this.updateActiveFilters();
-                    this.filterProjects();
-                });
+                this.filterProjects();
             });
+        });
         }
     }
     
@@ -212,7 +212,9 @@ class ProjectsManager {
             
             // Show/hide project based on filters
             if (matchesFilter && matchesSearch) {
-                project.style.display = 'block';
+                project.style.display = 'flex';
+                project.style.flexDirection = 'column';
+                project.style.height = '100%';
                 project.style.animation = 'fadeInUp 0.6s ease forwards';
             } else {
                 project.style.display = 'none';
@@ -232,10 +234,14 @@ class ProjectsManager {
     }
     
     setupAnimations() {
-        // Add staggered animation to project cards
+        // Add staggered animation to project cards and ensure flexbox properties
         this.projects.forEach((project, index) => {
             project.style.animationDelay = `${index * 0.1}s`;
             project.classList.add('fade-in');
+            // Ensure flexbox properties are maintained
+            project.style.display = 'flex';
+            project.style.flexDirection = 'column';
+            project.style.height = '100%';
         });
     }
 }
@@ -280,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
     projectCards.forEach(el => observer.observe(el));
 });
 
-console.log('Projects page loaded successfully! 🚀');
+console.log('Projects page loaded successfully! 🚀'); 
 
 // Disclaimer sliding animation
 document.addEventListener('DOMContentLoaded', () => {

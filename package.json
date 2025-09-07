@@ -1,0 +1,15 @@
+{
+  "name": "new-portfolio-replica",
+  "version": "1.0.0",
+  "description": "An Apple-inspired portfolio website featuring clean design, smooth animations, and modern interactions.",
+  "main": "projects.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.92.1"
+  }
+}
